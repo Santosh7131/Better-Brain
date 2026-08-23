@@ -1,114 +1,127 @@
 # better-brain
 
-**Give Claude Code a persistent, shared "second brain" — in one command.**
+**Give your AI a persistent, shared "second brain" — one vault, any assistant.**
 
-Every Claude Code session starts from nothing. `better-brain` sets up a small Obsidian
-vault of Markdown notes — your identity, your decisions, your hard-won environment facts —
-and wires Claude Code so that every *connected* project on your machine reads and writes
-that same brain. Stop re-explaining yourself to a blank slate each session.
+`better-brain` scaffolds an Obsidian vault of Markdown notes with a freshness-aware memory
+protocol, in a layout that fits how you work (10 persona presets), and wires your AI
+assistants — **Claude Code, Codex, Cursor, Windsurf, Cline, or anything MCP-aware** — to read
+and write that same brain. Stop re-explaining yourself to a blank slate every session.
 
-It's just Markdown. Obsidian is an optional (nice) graph viewer; Claude reads the notes
-with or without it.
+It's plain Markdown. Obsidian is just a nice graph viewer; your AI reads the notes with or
+without it.
+
+> **Status:** pre-1.0, built in the open. Not on npm yet — install from source (below); the
+> `npx better-brain …` one-liner lands when it's published.
+
+## Quick start
 
 ```bash
-npx better-brain init
+git clone https://github.com/Santosh7131/Better-Brain
+cd Better-Brain
+node bin/cli.js init          # → npx better-brain init, once published
 ```
 
-That's the whole install. No clone, no config file.
-
----
-
-## What it sets up
-
-`init` does three things, and **never overwrites anything you already have**:
-
-1. **Scaffolds a vault** — an Obsidian-ready folder with a proven structure and a
-   *memory protocol* that teaches Claude how to keep notes fresh instead of stale.
-2. **Wires Claude Code** — adds a small, fenced block to your machine-wide
-   `~/.claude/CLAUDE.md` describing the brain and the rule that it's **off by default**.
-3. **Handles Obsidian** — detects it, or offers to install it (winget / Homebrew /
-   Flatpak / Snap), falling back to the download link.
+`init` picks a preset, scaffolds the vault, wires your AI, and sets up Obsidian — and it
+**never overwrites anything you already have.**
 
 Then, in any project you want to give memory:
 
 ```bash
-npx better-brain connect
+node bin/cli.js connect --agents claude-code,cursor    # or --all
 ```
 
-This adds a connection block to that project's `CLAUDE.md`. From then on, Claude Code
-sessions in that project read and write the shared brain.
+## Presets
 
----
+Every preset shares the same protocol and the same anchors (`00-identity/`, `templates/`,
+`99-inbox/`); only the numbered domains and note types differ.
 
-## The vault
+| Preset | For |
+|---|---|
+| `generic` | The all-rounder (default) — projects / areas / knowledge / reference / people |
+| `developer` | Repos, code patterns, systems, TILs, ADRs |
+| `researcher` | Literature → concepts → experiments → writing |
+| `creator` | Ideas → drafts → research → published → audience |
+| `founder` | Strategy, product, GTM, customers, team |
+| `student` | Courses, notes, assignments, exams |
+| `freelancer` | Clients, projects, pipeline, finance, playbooks |
+| `pm` | Discovery, feedback, roadmap, specs, market |
+| `marketer` | Campaigns, content, channels, assets, analytics |
+| `educator` | Courses, lessons, students, assessments |
 
-```
-Second Brain/
-├─ Brain.md                     # the index — every session reads this first
-├─ decision-log.md              # dated decisions + the reasoning behind them
-├─ 00-identity/
-│  ├─ about-me.md               # who you are (fill in)
-│  ├─ how-to-work-with-me.md    # how Claude should behave (fill in)
-│  ├─ memory-protocol.md        # the contract: how notes are read & kept fresh
-│  └─ who-can-write-here.md     # which projects are connected (off by default)
-├─ 10-work/                     # job / client work
-├─ 20-learning/                 # what you're studying
-├─ 30-projects/                 # one note per project (+ _status-template.md)
-├─ 40-reference/
-│  ├─ capabilities.md           # tools other projects can reach for
-│  └─ machine-and-toolchains.md # environment facts that bite
-└─ 99-inbox/                    # unfiled dumps
+```bash
+node bin/cli.js presets                 # list them
+node bin/cli.js init --preset developer # use one
 ```
 
-## The protocol (why this isn't just a notes folder)
+## Connect any AI
 
-The heart of `better-brain` is `memory-protocol.md`, which encodes a few rules that keep a
-long-lived knowledge base trustworthy:
+`connect` writes a small, fenced connection block into the rule file each agent reads. Two
+open standards plus a handful of native files cover almost everything:
 
-- **Volatility.** Every note is `stable` (your name, past decisions) or `volatile` (repo
-  state, URLs, "current" status). *A volatile fact is a hint about where to look, never a
-  fact to assert* — sessions re-check it before repeating it.
-- **Freshness dates.** `updated` bumps on every edit; `verified` bumps only when facts
-  were actually re-checked against reality.
-- **The `public:` flag.** Notes are private by default; only `public: true` notes may feed
-  anything the world sees (like a GitHub profile). This is the gate that stops private
-  material from leaking.
-- **Two-tier memory.** The vault holds cross-project knowledge; per-project implementation
-  detail stays in Claude Code's own `~/.claude/projects/<slug>/memory/`. The vault points
-  at it, never copies it.
+| Agent | File it writes |
+|---|---|
+| Claude Code | `CLAUDE.md` |
+| Codex (and OpenCode — shared standard) | `AGENTS.md` |
+| Cursor | `.cursor/rules/better-brain.md` |
+| Windsurf | `.windsurfrules` |
+| Cline | `.clinerules` |
+| **Anything MCP-aware** | the MCP server → `node bin/cli.js mcp` |
+
+The MCP server exposes `list_notes`, `read_note`, `search_notes`, and `write_note`, so any
+MCP client (Claude Desktop, Cursor, ChatGPT desktop…) can use the brain with no native file.
+
+## The protocol (why it isn't just a notes folder)
+
+`00-identity/memory-protocol.md` encodes the rules that keep a long-lived brain trustworthy:
+
+- **Volatility.** Every note is `stable` or `volatile`. *A volatile fact is a hint about where
+  to look, never a fact to assert* — sessions re-check it before repeating it.
+- **Freshness dates.** `updated` bumps on every edit; `verified` only when facts were actually
+  re-checked against reality.
+- **The `public:` flag.** Notes are private by default; only `public: true` may feed anything
+  the world sees. The gate that stops private material leaking.
+- **Two-tier memory.** The vault holds cross-project knowledge; per-project detail stays in the
+  AI client's own memory (e.g. Claude Code's `~/.claude/projects/<slug>/memory/`).
 
 ## Commands
 
 | Command | What it does |
 |---|---|
-| `npx better-brain init` | Scaffold the vault, wire Claude Code, set up Obsidian |
-| `npx better-brain connect [path]` | Connect a project (default: current directory) to the brain |
-| `npx better-brain doctor` | Check that the brain, the wiring, and Obsidian are all in place |
+| `init` | Pick a preset, scaffold the vault, wire your AI, set up Obsidian |
+| `presets` | List the available layouts |
+| `connect [path]` | Wire a project to the brain (`--agents <list>` or `--all`) |
+| `mcp` | Run the MCP server so any MCP-aware AI can use the brain |
+| `doctor` | Check the brain, wiring, and Obsidian are in place |
 
-Flags: `--vault <path>`, `--name <name>`, `-y/--yes` (accept defaults), `-h/--help`,
-`-v/--version`.
+Flags: `--preset <id>`, `--vault <path>`, `--name <name>`, `--agents <list>`, `--all`,
+`-y/--yes`, `-h/--help`, `-v/--version`.
 
 ## Safety
 
-- **Non-destructive.** Template files are only written if absent; your edits are never
-  clobbered. Re-running is always safe and idempotent.
-- **Off by default.** No project reads the brain until you explicitly `connect` it.
-- **No secrets.** The protocol forbids storing tokens, keys, or passwords in the vault.
-- **Reversible.** Everything `better-brain` injects is wrapped in
-  `<!-- better-brain:start -->` / `<!-- better-brain:end -->` markers, so you can find and
-  remove it by hand.
+- **Non-destructive** — template files are written only if absent; re-running is idempotent.
+- **Off by default** — no project reads the brain until you `connect` it.
+- **No secrets** — the protocol forbids tokens, keys, or passwords in the vault.
+- **Reversible** — everything injected is fenced by `<!-- better-brain:start -->` /
+  `<!-- better-brain:end -->` markers, so you can find and remove it by hand.
 
 ## Requirements
 
-- **Node.js 18+** (you already have it if you use Claude Code).
-- **Obsidian** — optional; auto-installed on request, or grab it at
-  [obsidian.md](https://obsidian.md/download). The vault works as plain Markdown without it.
+- **Node.js 18+.**
+- **Obsidian** — optional; auto-installed on request, or from [obsidian.md](https://obsidian.md/download).
+- The `mcp` command uses `@modelcontextprotocol/sdk` (a normal dependency, loaded only for that
+  command); every other command is dependency-free.
+
+## Development
+
+```bash
+npm install     # only needed for the MCP command / tests
+npm test        # node:test — notes, adapters, and an MCP integration test
+```
 
 ## Roadmap
 
-v1 sets up the brain itself. Planned modules (opt-in) layer your wider toolkit on top —
-graph/knowledge tooling, memory search, MCP servers, and frontend skills — so a fresh
-machine can be brought all the way up with the same one command.
+A desktop-app installer (Electron) with preset cards and a custom-structure builder, and
+optional toolkit modules layered on top.
 
 ## License
 
