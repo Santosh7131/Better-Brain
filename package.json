@@ -1,7 +1,7 @@
 {
   "name": "better-brain",
   "version": "0.1.0",
-  "description": "One command to give Claude Code a persistent, shared second brain: an Obsidian vault of markdown notes with a freshness-aware memory protocol, wired into Claude Code so every session on your machine reads and writes it.",
+  "description": "Give your AI a persistent, shared second brain — an Obsidian vault of markdown notes with a freshness-aware memory protocol and persona presets, wired into your coding assistant.",
   "type": "module",
   "bin": {
     "better-brain": "bin/cli.js"
@@ -28,6 +28,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/cli.js",
-    "brain": "node bin/cli.js"
+    "brain": "node bin/cli.js",
+    "test": "node --test"
   }
 }
