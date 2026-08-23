@@ -55,3 +55,8 @@ export function connectProject(projectDir, vaultPath, tokens = {}) {
     ...tokens,
   });
 }
+
+// Write the connect block into an arbitrary rule file (used by the AI adapters).
+export function connectFile(targetFile, templateName, vaultPath, tokens = {}) {
+  return applyBlock(targetFile, templateName, { VAULT_PATH: vaultPath, ...tokens });
+}
