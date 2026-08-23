@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, Menu, nativeTheme } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { listPresets, getPreset } from '../src/lib/presets.js';
@@ -16,10 +16,17 @@ function today() {
 }
 
 function createWindow() {
+  Menu.setApplicationMenu(null); // installers have no menu bar
   const win = new BrowserWindow({
-    width: 920,
-    height: 700,
-    backgroundColor: '#140A2E',
+    width: 620,
+    height: 512,
+    useContentSize: true,
+    resizable: false,
+    maximizable: false,
+    fullscreenable: false,
+    autoHideMenuBar: true,
+    title: 'Better-Brain Setup',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#141519' : '#f2f3f5',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
