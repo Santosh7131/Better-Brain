@@ -49,13 +49,15 @@ ipcMain.handle('pick-folder', async () => {
 
 ipcMain.handle('obsidian-detect', () => obsidian.detect());
 
-// Create the vault for a preset and wire the machine-wide contract.
-ipcMain.handle('install', (_e, { vault, name, presetId }) => {
+// Create the vault for a preset, wire the machine-wide contract, and write the
+// chosen agents' rule files into the vault folder.
+ipcMain.handle('install', (_e, { vault, name, presetId, agents }) => {
   const preset = getPreset(presetId) || getPreset();
   const tokens = { NAME: name || 'me', DATE: today(), VAULT_PATH: vault };
   const { created } = scaffoldPreset(vault, preset, tokens);
   const g = ensureGlobalBlock(vault, tokens);
-  return { preset: preset.label, filesWritten: created.length, contract: g.file };
+  const wired = (agents || []).map((id) => connectAdapter(vault, id, vault, tokens).label);
+  return { preset: preset.label, filesWritten: created.length, contract: g.file, wired };
 });
 
 // Wire a chosen project folder to the vault for the selected agents.
