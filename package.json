@@ -29,7 +29,8 @@
   "scripts": {
     "start": "node bin/cli.js",
     "brain": "node bin/cli.js",
-    "test": "node --test"
+    "test": "node --test",
+    "app": "electron app/main.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0"
