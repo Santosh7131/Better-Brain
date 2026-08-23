@@ -79,11 +79,15 @@ async function doInstall() {
   $('pg-label').textContent = 'Creating your brain…';
   $('pg-fill').style.width = '100%';
   const agents = [...document.querySelectorAll('#agents input:checked')].map((c) => c.value);
+  const github = $('gh').checked ? { url: $('gh-url').value.trim(), commit: $('gh-commit').checked } : null;
+  const obsidian = $('obs').checked;
   try {
-    const r = await window.brain.install({ vault, name: $('uname').value.trim(), presetId: preset, agents });
+    const r = await window.brain.install({ vault, name: $('uname').value.trim(), presetId: preset, agents, github, obsidian });
     const list = $('fin-list'); list.textContent = '';
     list.appendChild(el('li', { textContent: `${r.filesWritten} files written to ${vault}` }));
     if (r.wired && r.wired.length) list.appendChild(el('li', { textContent: 'Connected: ' + r.wired.join(', ') }));
+    if (r.github) list.appendChild(el('li', { textContent: 'GitHub repo linked: ' + r.github }));
+    if (r.obsidian) list.appendChild(el('li', { textContent: 'Obsidian: ' + r.obsidian }));
     list.appendChild(el('li', { textContent: 'Contract added to ' + r.contract }));
     $('fin-line').textContent = `Your ${r.preset} brain is ready.`;
     i = 7; render();
