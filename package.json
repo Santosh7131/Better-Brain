@@ -30,5 +30,8 @@
     "start": "node bin/cli.js",
     "brain": "node bin/cli.js",
     "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0"
   }
 }
