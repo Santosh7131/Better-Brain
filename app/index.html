@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Better-Brain</title>
+    <!-- NOTE: functional scaffold only. The visual design is a later pass, done once the
+         app can render and be screenshotted for review. -->
+    <style>
+      :root { --bg:#140A2E; --panel:#1E1140; --line:#33235e; --ink:#EDE9FE; --dim:#A99FC7; --violet:#8B5CF6; --cyan:#38BDF8; }
+      * { box-sizing: border-box; }
+      body { margin:0; font:15px/1.5 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+      header { padding:20px 28px; border-bottom:1px solid var(--line); }
+      h1 { margin:0; font-size:20px; letter-spacing:.5px; }
+      header p { margin:4px 0 0; color:var(--dim); font-size:13px; }
+      main { padding:24px 28px; max-width:820px; }
+      section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:20px; }
+      h2 { margin:0 0 12px; font-size:15px; color:var(--cyan); }
+      label { display:block; margin:12px 0 4px; color:var(--dim); font-size:13px; }
+      input[type=text] { width:100%; padding:8px 10px; background:#0F0822; border:1px solid var(--line); border-radius:8px; color:var(--ink); }
+      .row { display:flex; gap:8px; }
+      .row input { flex:1; }
+      button { background:var(--violet); color:#fff; border:0; border-radius:8px; padding:9px 16px; cursor:pointer; font-weight:600; }
+      button.ghost { background:transparent; border:1px solid var(--line); color:var(--ink); font-weight:500; }
+      button:hover { filter:brightness(1.08); }
+      .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+      .card { border:1px solid var(--line); border-radius:10px; padding:10px 12px; cursor:pointer; }
+      .card.sel { border-color:var(--violet); background:#241452; }
+      .card b { display:block; }
+      .card small { color:var(--dim); }
+      .checks { display:flex; flex-wrap:wrap; gap:14px; }
+      .checks label { display:flex; align-items:center; gap:6px; margin:0; color:var(--ink); }
+      pre { background:#0F0822; border:1px solid var(--line); border-radius:8px; padding:10px; white-space:pre-wrap; color:var(--dim); min-height:20px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Better-Brain</h1>
+      <p>Give your AI a persistent, shared second brain.</p>
+    </header>
+    <main>
+      <section>
+        <h2>1 · Create your brain</h2>
+        <label>Preset</label>
+        <div id="presets" class="cards"></div>
+        <label for="vault">Vault location</label>
+        <div class="row">
+          <input type="text" id="vault" placeholder="e.g. C:\Users\you\Documents\Second Brain" />
+          <button class="ghost" id="browse-vault">Browse…</button>
+        </div>
+        <label for="name">Your name (seeds about-me)</label>
+        <input type="text" id="name" placeholder="me" />
+        <p><button id="install">Create brain</button></p>
+        <pre id="install-out"></pre>
+      </section>
+
+      <section>
+        <h2>2 · Connect a project</h2>
+        <label for="project">Project folder</label>
+        <div class="row">
+          <input type="text" id="project" placeholder="the repo/folder to give memory" />
+          <button class="ghost" id="browse-project">Browse…</button>
+        </div>
+        <label>Agents to wire</label>
+        <div id="agents" class="checks"></div>
+        <p><button id="connect">Connect project</button></p>
+        <pre id="connect-out"></pre>
+      </section>
+    </main>
+    <script src="renderer.js"></script>
+  </body>
+</html>
