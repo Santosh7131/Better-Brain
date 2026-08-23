@@ -17,6 +17,7 @@ function parseArgs(argv) {
     else if (a === '--vault') opts.vault = argv[++i];
     else if (a === '--name') opts.name = argv[++i];
     else if (a === '--preset') opts.preset = argv[++i];
+    else if (a === '--agents') opts.agents = argv[++i];
     else if (a.startsWith('--')) opts[a.slice(2)] = true;
     else opts._.push(a);
   }
@@ -40,6 +41,8 @@ Options:
   --vault <path>       Vault location (default: ~/Documents/Second Brain)
   --name <name>        Your name, used to seed about-me
   --preset <id>        Persona preset for the vault (see: better-brain presets)
+  --agents <list>      Agents to wire on connect (comma list, or --all):
+                       claude-code, codex, cursor, windsurf, cline
   -y, --yes            Accept defaults, no prompts
   -h, --help           Show this help
   -v, --version        Show version
