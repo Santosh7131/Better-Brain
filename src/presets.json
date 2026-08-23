@@ -1,0 +1,141 @@
+{
+  "_comment": "Better-Brain preset catalog. Every preset shares the same anchors + the same memory protocol; only the numbered domains and the note-type vocabulary differ. Numbers are Johnny.Decimal-style ordering. Domains and note types are the data spine; per-preset note templates are generated from noteTypes at scaffold time.",
+  "anchors": [
+    { "dir": "00-identity", "desc": "who you are, how the AI should work with you, the memory protocol" },
+    { "dir": "templates", "desc": "one starter note per type" },
+    { "dir": "99-inbox", "desc": "unfiled capture" }
+  ],
+  "presets": [
+    {
+      "id": "generic",
+      "label": "Generic Second Brain",
+      "default": true,
+      "description": "For anyone who won't self-classify — a productivity and learning all-rounder. The safe default.",
+      "domains": [
+        { "dir": "10-projects", "desc": "bounded efforts with an end" },
+        { "dir": "20-areas", "desc": "ongoing responsibilities you maintain" },
+        { "dir": "30-knowledge", "desc": "things you're learning and evergreen concepts" },
+        { "dir": "40-reference", "desc": "tools, machine facts, things to look up" },
+        { "dir": "50-people", "desc": "people and organisations" }
+      ],
+      "noteTypes": ["project", "area", "concept", "source", "person"]
+    },
+    {
+      "id": "developer",
+      "label": "Developer / Engineer",
+      "description": "Capture project context, code patterns, and what you learn while shipping.",
+      "domains": [
+        { "dir": "10-projects", "desc": "repos and bounded pieces of work" },
+        { "dir": "20-knowledge", "desc": "snippets, patterns, things learned" },
+        { "dir": "30-systems", "desc": "architecture and how systems fit together" },
+        { "dir": "40-reference", "desc": "tools, commands, machine and toolchain facts" },
+        { "dir": "50-people", "desc": "teammates, maintainers, contacts" }
+      ],
+      "noteTypes": ["project", "snippet", "til", "runbook", "adr", "person"]
+    },
+    {
+      "id": "researcher",
+      "label": "Researcher / Academic",
+      "description": "Read literature, distil concepts, run experiments, and write it up.",
+      "domains": [
+        { "dir": "10-literature", "desc": "papers and reading notes" },
+        { "dir": "20-concepts", "desc": "permanent, atomic concept notes" },
+        { "dir": "30-projects", "desc": "studies and experiments" },
+        { "dir": "40-writing", "desc": "manuscripts and drafts" },
+        { "dir": "50-people", "desc": "collaborators and authors" }
+      ],
+      "noteTypes": ["literature-note", "concept", "experiment", "map", "person"]
+    },
+    {
+      "id": "creator",
+      "label": "Creator / Writer",
+      "description": "Turn ideas into published work — writing, video, newsletters, podcasts.",
+      "domains": [
+        { "dir": "10-ideas", "desc": "raw idea capture" },
+        { "dir": "20-drafts", "desc": "drafts, scripts, manuscripts in progress" },
+        { "dir": "30-research", "desc": "research and swipe file" },
+        { "dir": "40-published", "desc": "shipped pieces and the calendar" },
+        { "dir": "50-audience", "desc": "audience, collaborators, sponsors" }
+      ],
+      "noteTypes": ["idea", "draft", "swipe", "content-piece", "collab"]
+    },
+    {
+      "id": "founder",
+      "label": "Founder / Startup",
+      "description": "Run a company — strategy, product, go-to-market, customers, team.",
+      "domains": [
+        { "dir": "10-strategy", "desc": "goals, OKRs, direction" },
+        { "dir": "20-product", "desc": "specs and product thinking" },
+        { "dir": "30-gtm", "desc": "marketing and sales" },
+        { "dir": "40-customers", "desc": "leads, customers, CRM notes" },
+        { "dir": "50-people", "desc": "team, advisors, investors" }
+      ],
+      "noteTypes": ["okr", "product-spec", "customer", "meeting", "investor"]
+    },
+    {
+      "id": "student",
+      "label": "Student",
+      "description": "Manage courses, notes, assignments, and exams.",
+      "domains": [
+        { "dir": "10-courses", "desc": "one note per course" },
+        { "dir": "20-notes", "desc": "lecture and study notes" },
+        { "dir": "30-assignments", "desc": "assignments and their status" },
+        { "dir": "40-exams", "desc": "exam prep and study guides" },
+        { "dir": "50-resources", "desc": "textbooks, links, references" }
+      ],
+      "noteTypes": ["course", "lecture-note", "assignment", "study-guide", "concept"]
+    },
+    {
+      "id": "freelancer",
+      "label": "Freelancer / Consultant",
+      "description": "Sell your time — clients, engagements, pipeline, invoices, playbooks.",
+      "domains": [
+        { "dir": "10-clients", "desc": "one note per client or account" },
+        { "dir": "20-projects", "desc": "engagements and deliverables" },
+        { "dir": "30-pipeline", "desc": "leads and proposals" },
+        { "dir": "40-finance", "desc": "invoices and money" },
+        { "dir": "50-knowledge", "desc": "SOPs, playbooks, reusable know-how" }
+      ],
+      "noteTypes": ["client", "engagement", "proposal", "invoice", "sop"]
+    },
+    {
+      "id": "pm",
+      "label": "Product Manager",
+      "description": "Turn research and feedback into roadmap and specs.",
+      "domains": [
+        { "dir": "10-discovery", "desc": "user research and interviews" },
+        { "dir": "20-feedback", "desc": "incoming feedback items" },
+        { "dir": "30-roadmap", "desc": "initiatives and roadmap" },
+        { "dir": "40-specs", "desc": "PRDs and specs" },
+        { "dir": "50-market", "desc": "competitors and market notes" }
+      ],
+      "noteTypes": ["user-interview", "feedback", "initiative", "prd", "competitor"]
+    },
+    {
+      "id": "marketer",
+      "label": "Marketer / Growth",
+      "description": "Run campaigns and content across channels, and measure them.",
+      "domains": [
+        { "dir": "10-campaigns", "desc": "campaign briefs and plans" },
+        { "dir": "20-content", "desc": "content pieces" },
+        { "dir": "30-channels", "desc": "per-channel playbooks" },
+        { "dir": "40-assets", "desc": "swipe file and creative assets" },
+        { "dir": "50-analytics", "desc": "experiments and results" }
+      ],
+      "noteTypes": ["campaign", "content-piece", "channel-playbook", "swipe", "experiment"]
+    },
+    {
+      "id": "educator",
+      "label": "Educator / Teacher",
+      "description": "Plan classes and track students and assessments.",
+      "domains": [
+        { "dir": "10-courses", "desc": "courses and classes" },
+        { "dir": "20-lessons", "desc": "lessons and units" },
+        { "dir": "30-students", "desc": "student notes" },
+        { "dir": "40-assessments", "desc": "assessments and rubrics" },
+        { "dir": "50-resources", "desc": "teaching resources" }
+      ],
+      "noteTypes": ["course", "lesson-plan", "student-note", "assessment", "resource"]
+    }
+  ]
+}
