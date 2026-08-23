@@ -1,0 +1,12 @@
+node_modules/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.env
+.env.*
+
+# internal working docs / WIP — keep out of the public repo
+PLAN.md
+STRUCTURE-PROPOSAL.md
+assets/
