@@ -24,7 +24,7 @@ function parseArgs(argv) {
 }
 
 const HELP = `
-better-brain — a persistent, shared second brain for Claude Code
+better-brain — a persistent, shared second brain for your AI
 
 Usage:
   npx better-brain <command> [options]
@@ -34,6 +34,7 @@ Commands:
   connect [path]       Connect a project (default: current dir) to the brain
   doctor               Check that the brain, wiring, and Obsidian are in place
   presets              List the available vault presets
+  mcp                  Run the MCP server (lets any MCP-aware AI use the brain)
 
 Options:
   --vault <path>       Vault location (default: ~/Documents/Second Brain)
@@ -71,6 +72,8 @@ async function main() {
       return (await import('../src/commands/doctor.js')).run(opts);
     case 'presets':
       return (await import('../src/commands/presets.js')).run(opts);
+    case 'mcp':
+      return (await import('../src/commands/mcp.js')).run(opts);
     default:
       log.err(`Unknown command: ${cmd}`);
       console.log(HELP);
