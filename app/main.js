@@ -27,7 +27,7 @@ function createWindow() {
     fullscreenable: false,
     autoHideMenuBar: true,
     title: 'Better-Brain Setup',
-    backgroundColor: nativeTheme.shouldUseDarkColors ? '#141519' : '#f2f3f5',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#17181b' : '#ffffff',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
