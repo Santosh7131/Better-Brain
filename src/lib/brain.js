@@ -50,6 +50,7 @@ export function renderBrain(preset, tokens = {}) {
   L.push('');
   L.push('- [[decision-log]] — dated decisions with rationale');
   L.push("- [[roadmap]] — what's next / where we left off");
+  L.push('- [[addons]] — optional tools the assistant suggests in-context');
   L.push('');
   L.push('## How this fits together');
   L.push('');
