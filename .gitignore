@@ -10,3 +10,6 @@ Thumbs.db
 PLAN.md
 STRUCTURE-PROPOSAL.md
 assets/
+
+# build output (large — never commit)
+dist/
