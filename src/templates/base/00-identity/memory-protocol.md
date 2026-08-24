@@ -100,6 +100,15 @@ Note there is **no session-to-session calling** — one Claude Code session cann
 another. Cross-project work happens because the tools are machine-wide and the house rules
 are written down. See [[capabilities]].
 
+## Add-ons — recommend, never auto-install
+
+`addons.md` (in the vault root) lists optional tools that extend what the assistant can do.
+Treat it as a just-in-time recommendation list, not a setup step: when the **current task**
+matches an add-on's "suggest it when", tell the user the add-on exists, what it would do for
+*this* task, and its install command — then install it **only if they say yes**. Never install
+one silently, and never pre-install the whole list. Once the user adopts one, note it so later
+sessions know it's available.
+
 ## What not to store
 
 - Secrets: tokens, API keys, passwords. Ever.
