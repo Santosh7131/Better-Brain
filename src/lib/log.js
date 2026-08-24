@@ -7,13 +7,12 @@ export const dim = paint('2');
 export const red = paint('31');
 export const green = paint('32');
 export const yellow = paint('33');
-export const cyan = paint('36');
 
 export function heading(s) {
   console.log('\n' + bold(s));
 }
 export function step(s) {
-  console.log(cyan('>') + ' ' + s);
+  console.log(bold('>') + ' ' + s);
 }
 export function ok(s) {
   console.log(green('OK') + ' ' + s);
