@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Packaged app icon ONLY: a light neutral disc so the mark reads on any taskbar.
+       The logo itself (assets/logo.svg, in-app mark) stays container-less. -->
+  <defs>
+    <radialGradient id="disc" cx="0.5" cy="0.42" r="0.75">
+      <stop offset="0" stop-color="#F6F7F9"/>
+      <stop offset="1" stop-color="#E6E8EC"/>
+    </radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="232" fill="url(#disc)"/>
+  <circle cx="256" cy="256" r="232" fill="none" stroke="#D3D7DE" stroke-width="3"/>
+
+  <g transform="translate(256 256) scale(1.5) translate(-256 -254)">
+    <g stroke="#1b1c20" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="256" y1="196" x2="200" y2="216"/>
+      <line x1="256" y1="196" x2="312" y2="216"/>
+      <line x1="200" y1="216" x2="182" y2="270"/>
+      <line x1="312" y1="216" x2="330" y2="270"/>
+      <line x1="182" y1="270" x2="224" y2="312"/>
+      <line x1="330" y1="270" x2="288" y2="312"/>
+      <line x1="224" y1="312" x2="288" y2="312"/>
+      <line x1="200" y1="216" x2="256" y2="256"/>
+      <line x1="312" y1="216" x2="256" y2="256"/>
+      <line x1="256" y1="256" x2="224" y2="312"/>
+      <line x1="256" y1="256" x2="288" y2="312"/>
+      <line x1="256" y1="196" x2="256" y2="256"/>
+    </g>
+    <g fill="#1b1c20">
+      <circle cx="256" cy="196" r="12"/>
+      <circle cx="200" cy="216" r="10"/>
+      <circle cx="312" cy="216" r="10"/>
+      <circle cx="182" cy="270" r="10"/>
+      <circle cx="330" cy="270" r="10"/>
+      <circle cx="224" cy="312" r="10"/>
+      <circle cx="288" cy="312" r="10"/>
+    </g>
+    <circle cx="256" cy="256" r="15" fill="#1b1c20"/>
+  </g>
+</svg>
