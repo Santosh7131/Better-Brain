@@ -9,7 +9,9 @@ VAULT: `{{VAULT_PATH}}`
 
 Read `Brain.md` first (it maps this vault's folders), then `00-identity/memory-protocol.md`
 (the contract), then whichever notes touch what you're doing. `00-identity/about-me.md` is who
-the user is; `00-identity/how-to-work-with-me.md` is how they want you to work.
+the user is; `00-identity/how-to-work-with-me.md` is how they want you to work. If the task
+would go better with a tool listed in `addons.md`, recommend it (with its install command) —
+never auto-install.
 
 ### Write to the brain when something durable happens
 
