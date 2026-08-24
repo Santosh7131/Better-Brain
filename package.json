@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Give your AI a persistent, shared second brain — an Obsidian vault of markdown notes with a freshness-aware memory protocol and persona presets, wired into your coding assistant.",
   "type": "module",
+  "main": "app/main.js",
+  "author": "Santosh7131",
   "bin": {
     "better-brain": "bin/cli.js"
   },
@@ -30,9 +32,31 @@
     "start": "node bin/cli.js",
     "brain": "node bin/cli.js",
     "test": "node --test",
-    "app": "electron app/main.js"
+    "app": "electron app/main.js",
+    "dist": "electron-builder --win"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "devDependencies": {
+    "electron": "^43.4.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.santosh7131.betterbrain",
+    "productName": "Better-Brain",
+    "files": [
+      "app/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    }
   }
 }
